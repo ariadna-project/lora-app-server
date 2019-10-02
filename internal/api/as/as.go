@@ -363,13 +363,12 @@ func (a *ApplicationServerAPI) HandleUplinkData(ctx context.Context, req *as.Han
 						row.FineTimestamp = &ts
 					}
 		} else if rxInfo.Time != nil {
-					ts, err := ptypes.Timestamp(rxInfo.Time)
-					if err != nil {
-						log.WithField("dev_eui", devEUI).WithError(err).Error("parse timestamp error")
-					} else {
-						row.Time = &ts
-					}
-				}
+			ts, err := ptypes.Timestamp(rxInfo.Time)
+			if err != nil {
+				log.WithField("dev_eui", devEUI).WithError(err).Error("parse timestamp error")
+			} else {
+				row.Time = &ts
+			}
 		}
 
 		pl.RXInfo = append(pl.RXInfo, row)
