@@ -355,18 +355,14 @@ func (a *ApplicationServerAPI) HandleUplinkData(ctx context.Context, req *as.Han
 			row.Name = gw.Name
 		}
 
-		if rxInfo.PlainFineTimestamp != nil {
-			ts, err := ptypes.Timestamp(rxInfo.PlainFineTimestamp)
+		if rxInfo.FineTimestamp != nil {
+			ts, err := ptypes.Timestamp(rxInfo.FineTimestamp)
 					if err != nil {
 						log.WithField("dev_eui", devEUI).WithError(err).Error("parse finetimestamp error")
 					} else {
 						row.FineTimestamp = &ts
 					}
-		} else {
-			if rxInfo.EncryptedFineTimestamp != nil {
-				log.WithField("dev_eui", devEUI).WithError(err).Error("el campo finetimestamp viene encripado")
-			} else {
-				if rxInfo.Time != nil {
+		} else if rxInfo.Time != nil {
 					ts, err := ptypes.Timestamp(rxInfo.Time)
 					if err != nil {
 						log.WithField("dev_eui", devEUI).WithError(err).Error("parse timestamp error")
@@ -374,7 +370,6 @@ func (a *ApplicationServerAPI) HandleUplinkData(ctx context.Context, req *as.Han
 						row.Time = &ts
 					}
 				}
-			}
 		}
 
 		pl.RXInfo = append(pl.RXInfo, row)
