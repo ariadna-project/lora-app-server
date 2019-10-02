@@ -4,6 +4,7 @@ import (
 	"encoding/gob"
 	"encoding/json"
 	"time"
+	"timestamp"
 
 	"github.com/brocaar/lorawan"
 	"github.com/gofrs/uuid"
