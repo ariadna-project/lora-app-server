@@ -355,12 +355,29 @@ func (a *ApplicationServerAPI) HandleUplinkData(ctx context.Context, req *as.Han
 			row.Name = gw.Name
 		}
 
-		if rxInfo.Time != nil {
-			ts, err := ptypes.Timestamp(rxInfo.Time)
-			if err != nil {
-				log.WithField("dev_eui", devEUI).WithError(err).Error("parse timestamp error")
-			} else {
-				row.Time = &ts
+		if rxInfo.plain_fine_timestamp != nil {
+			ts, err := ptypes.Timestamp(rxInfo.plain_fine_timestamp)
+					if err != nil {
+						log.WithField("dev_eui", devEUI).WithError(err).Error("parse finetimestamp error")
+					} else {
+						row.FineTimestamp = &ts
+					}
+		}
+		else
+		{
+			if rxInfo.encrypted_fine_timestamp != nil {
+				log.WithField("dev_eui", devEUI).WithError(err).Error("el campo finetimestamp viene encripado")
+			}
+			else
+			{
+				if rxInfo.Time != nil {
+					ts, err := ptypes.Timestamp(rxInfo.Time)
+					if err != nil {
+						log.WithField("dev_eui", devEUI).WithError(err).Error("parse timestamp error")
+					} else {
+						row.Time = &ts
+					}
+				}
 			}
 		}
 
