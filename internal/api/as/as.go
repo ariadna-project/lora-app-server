@@ -362,14 +362,10 @@ func (a *ApplicationServerAPI) HandleUplinkData(ctx context.Context, req *as.Han
 					} else {
 						row.FineTimestamp = &ts
 					}
-		}
-		else
-		{
+		} else {
 			if rxInfo.encrypted_fine_timestamp != nil {
 				log.WithField("dev_eui", devEUI).WithError(err).Error("el campo finetimestamp viene encripado")
-			}
-			else
-			{
+			} else {
 				if rxInfo.Time != nil {
 					ts, err := ptypes.Timestamp(rxInfo.Time)
 					if err != nil {
