@@ -372,7 +372,7 @@ func (a *ApplicationServerAPI) HandleUplinkData(ctx context.Context, req *as.Han
 		}
 */
 		if fts := rxInfo.GetPlainFineTimestamp(); fts != nil {
-			row.FineTimestamp = &fts.Time
+			row.FineTimestamp = fts.Time
 		} else if rxInfo.Time != nil {
 			ts, err := ptypes.Timestamp(rxInfo.Time)
 			if err != nil {
