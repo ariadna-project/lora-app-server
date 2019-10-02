@@ -4,7 +4,6 @@ import (
 	"encoding/gob"
 	"encoding/json"
 	"time"
-	"timestamp"
 
 	"github.com/brocaar/lorawan"
 	"github.com/gofrs/uuid"
@@ -28,14 +27,14 @@ type Location struct {
 
 // RXInfo contains the RX information.
 type RXInfo struct {
-	GatewayID 		lorawan.EUI64 			`json:"gatewayID"`
-	UplinkID  		uuid.UUID     			`json:"uplinkID"`
-	Name      		string        			`json:"name"`
-	Time      		*time.Time    			`json:"time,omitempty"`
-	FineTimestamp	*timestamp.Timestamp	`json:"fineTimestamp,omitempty"`
-	RSSI      		int           			`json:"rssi"`
-	LoRaSNR   		float64       			`json:"loRaSNR"`
-	Location  		*Location     			`json:"location"`
+	GatewayID 		lorawan.EUI64 	`json:"gatewayID"`
+	UplinkID  		uuid.UUID   	`json:"uplinkID"`
+	Name      		string      	`json:"name"`
+	Time      		*time.Time  	`json:"time,omitempty"`
+	FineTimestamp	*time.Time		`json:"fineTimestamp,omitempty"`
+	RSSI      		int           	`json:"rssi"`
+	LoRaSNR   		float64       	`json:"loRaSNR"`
+	Location  		*Location     	`json:"location"`
 }
 
 // TXInfo contains the TX information.
