@@ -375,7 +375,8 @@ func (a *ApplicationServerAPI) HandleUplinkData(ctx context.Context, req *as.Han
 			//Usar formato time.Time
 			row.FineTimestamp = fts.Time
 			ns64 = int64(fts.Time.Nanos)
-			row.Time = time.Unix(fts.Time.Seconds, ns64)
+			ts = time.Unix(fts.Time.Seconds, ns64)
+			row.Time = &ts
 		} else if rxInfo.Time != nil {
 			ts, err := ptypes.Timestamp(rxInfo.Time)
 			if err != nil {
