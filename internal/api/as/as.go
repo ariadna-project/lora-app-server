@@ -354,23 +354,7 @@ func (a *ApplicationServerAPI) HandleUplinkData(ctx context.Context, req *as.Han
 		if gw, ok := gws[mac]; ok {
 			row.Name = gw.Name
 		}
-/*
-		if rxInfo.FineTimestamp != nil {
-			ts, err := ptypes.Timestamp(rxInfo.FineTimestamp)
-					if err != nil {
-						log.WithField("dev_eui", devEUI).WithError(err).Error("parse finetimestamp error")
-					} else {
-						row.FineTimestamp = &ts
-					}
-		} else if rxInfo.Time != nil {
-			ts, err := ptypes.Timestamp(rxInfo.Time)
-			if err != nil {
-				log.WithField("dev_eui", devEUI).WithError(err).Error("parse timestamp error")
-			} else {
-				row.Time = &ts
-			}
-		}
-*/
+
 		if fts := rxInfo.GetPlainFineTimestamp(); fts != nil {
 			//Usar formato time.Time
 			row.FineTimestamp = fts.Time
